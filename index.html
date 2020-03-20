@@ -10,26 +10,56 @@
   <style>
     body {
       margin: 0;
+      background-color: #AB88FF;
     }
 
-    header {
-      background-color: #21C08B;
+    .header {
+      background-color: #AB88FF;
       width: 100%;
       height: 80px;
     }
 
-    header img {
+    .header__img {
       width: 200px;
       margin-top: 10px;
       margin-left: 10px;
     }
+
+    .header__menu {
+      margin-right: 30px;
+    }
+
+    .header__menu ul {
+      display: none;
+      list-style: none;
+      padding: 0;
+      position: absoule;
+      width: 100px;
+      text-align: right;
+      margin: 0px 0px 0px -14px;
+    }
+
+    .header__menu--profile {
+      margin-right: 8px;
+      width: 40px;
+    }
   </style>
   <body>
-    <header>
-      <img src="logo-platzi-video-BW2.png" alt="">
+    <header class="header">
+      <img class="header__img" src="logo-platzi-video-BW2.png" alt="">
+      <div class="header__menu">
+        <div class="header__menu--profile">
+          <img src="./user-icon.png" alt="User">
+          <p>Perfil</p>
+        </div>
+        <ul>
+          <li><a href="/">Cuenta</a></li>
+          <li><a href="/">Cerrar Sesión</a></li>
+        </ul>
+      </div>
     </header>
 
-    <nav>
+    <!-- <nav>
       <ol>
         <li>Home</li>
         <li>Account</li>
@@ -49,6 +79,6 @@
       Ads here
     </aside>
 
-    <footer>Copyright and those stuff</footer>
+    <footer>Copyright and those stuff</footer> -->
   </body>
 </html>
