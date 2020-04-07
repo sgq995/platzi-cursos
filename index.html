@@ -11,12 +11,12 @@
   <style>
     body {
       margin: 0;
-      background-color: #AB88FF;
+      background-color: #8F57FD;
       font-family: 'Muli', sans-serif;
     }
 
     .header {
-      background-color: #AB88FF;
+      background-color: #8F57FD;
       width: 100%;
       height: 80px;
       display: flex;
@@ -93,26 +93,34 @@
       </div>
     </header>
 
-    <!-- <nav>
-      <ol>
-        <li>Home</li>
-        <li>Account</li>
-      </ol>
-    </nav>
-    
-    <article>
-      <section>
-        Section I.
-      </section>
-      <section>
-        Section II.
-      </section>
-    </article>
-    
-    <aside>
-      Ads here
-    </aside>
+    <section class="login">
+      <section class="login__container">
+        <h2>Inicia Sesión</h2>
+        <form class="login__container--form">
+          <input class="input" type="text" placeholder="Correo">
+          <input class="password" type="text" placeholder="Contraseña">
+          <button class="button">Iniciar sesión</button>
+          <div class="login__container--remember-me">
+            <label for="">
+              <input type="checkbox" name="" id="cbox1" value="checkbox"> Recuérdame
+            </label>
+            <a href="/">Olvidé mi contraseña</a>
+          </div>
+        </form>
 
-    <footer>Copyright and those stuff</footer> -->
+        <section class="login__container--social-media">
+          <div><img src="./assets/google-icon.png" alt="Google">Inicia sesión con Google</div>
+          <div><img src="./assets/twitter-icon.png" alt="Google">Inicia sesión con Twitter</div>
+        </section>
+
+        <p class="login__container--register">No tienes ninguna cuenta <a href="">Regístrate</a></p>
+      </section>
+    </section>
+
+    <footer class="footer">
+      <a href="/">Terminos de uso</a>
+      <a href="/">Declaración de privacidad</a>
+      <a href="/">Centro de ayuda</a>
+    </footer>
   </body>
 </html>
