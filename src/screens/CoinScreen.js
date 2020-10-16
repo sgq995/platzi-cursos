@@ -3,6 +3,7 @@ import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-nati
 import { FlatList } from 'react-native-gesture-handler';
 import Coin from '../components/Coin';
 import Http from '../libs/https';
+import colors from '../res/colors';
 
 class CoinScreen extends Component {
   state = {
@@ -18,14 +19,13 @@ class CoinScreen extends Component {
     this.setState({ loading: true });
 
     const response = await Http.instance.get('https://api.coinlore.net/api/tickers/');
+    console.log(response);
 
     this.setState({ coins: response.data, loading: false });
   };
 
-  handlePress = () => {
-    console.log('Go to detail', this.props);
-
-    this.props.navigation.navigate('CoinDetail');
+  handlePress = (coin) => {
+    this.props.navigation.navigate('CoinDetail', { coin });
   };
 
   render() {
@@ -42,7 +42,12 @@ class CoinScreen extends Component {
         ) : (
             <FlatList
               data={coins}
-              renderItem={({ item }) => <Coin item={item} />}
+              renderItem={({ item }) =>
+                <Coin
+                  item={item}
+                  onPress={() => this.handlePress(item)}
+                />
+              }
             />
           )}
       </View>
@@ -53,7 +58,7 @@ class CoinScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.charade,
   },
 
   titleText: {
