@@ -19,7 +19,6 @@ class CoinScreen extends Component {
     this.setState({ loading: true });
 
     const response = await Http.instance.get('https://api.coinlore.net/api/tickers/');
-    console.log(response);
 
     this.setState({ coins: response.data, loading: false });
   };
