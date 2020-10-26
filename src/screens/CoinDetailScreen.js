@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, Image, Pressable, SectionList, StyleSheet, Text, View } from 'react-native';
+import { Alert, FlatList, Image, Pressable, SectionList, StyleSheet, Text, View } from 'react-native';
 import CoinMarketItem from '../components/CoinMarketItem';
 import Http from '../libs/https';
 import Storage from '../libs/storage';
@@ -70,18 +70,31 @@ class CoinDetailScreen extends Component {
     const key = this.getKey();
 
     const stored = await Storage.instance.store(key, value);
+    console.log(stored);
     if (stored) {
       this.setState({ isFavorite: true });
     }
   }
 
-  async removeFavorite() {
-    const key = this.getKey();
+  removeFavorite() {
+    Alert.alert('Remove favorite', 'Are you sure?', [
+      {
+        text: 'cancel',
+        onPress: () => { },
+        style: 'cancel',
+      },
+      {
+        text: 'Remove',
+        onPress: async () => {
+          const key = this.getKey();
 
-    const removed = await Storage.instance.remove(key);
-    if (removed) {
-      this.setState({ isFavorite: false });
-    }
+          const removed = await Storage.instance.remove(key);
+          if (removed) {
+            this.setState({ isFavorite: false });
+          }
+        },
+      },
+    ]);
   }
 
   handleToggleFavorite = () => {
