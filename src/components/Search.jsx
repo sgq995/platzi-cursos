@@ -4,9 +4,9 @@ import '../assets/styles/components/Search.scss';
 
 function Search() {
   return (
-    <section class="main">
-      <h2 class="main__title">¿Qué quieres ver hoy?</h2>
-      <input type="text" class="input" placeholder="Buscar..." />
+    <section className="main">
+      <h2 className="main__title">¿Qué quieres ver hoy?</h2>
+      <input type="text" className="input" placeholder="Buscar..." />
     </section>
   );
 }
