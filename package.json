@@ -1,0 +1,12 @@
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Sebastian Gonzalez Quintero <sgq995@gmail.com>",
+  "license": "MIT"
+}
