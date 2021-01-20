@@ -8,5 +8,14 @@
   },
   "keywords": [],
   "author": "Sebastian Gonzalez Quintero <sgq995@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "date-fns": "^2.16.1"
+  },
+  "optionalDependencies": {
+    "eslint": "^7.18.0"
+  }
 }
