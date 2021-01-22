@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "Sebastian Gonzalez Quintero <sgq995@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "graphql": "^15.4.0"
+  }
 }
