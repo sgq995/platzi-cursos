@@ -1,0 +1,18 @@
+{
+  AllCourses: getCourses {
+		_id
+    title
+  }
+  
+  Course1: getCourse(id: "60119e36ebed48ec84371db3") {
+    _id
+    title
+    description
+  }
+  
+  Course2: getCourse(id: "60119e75ebed48ec84371db5"){
+    title
+    description
+    topic
+  }
+}
