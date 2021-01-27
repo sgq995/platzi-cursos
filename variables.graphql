@@ -1,0 +1,17 @@
+mutation AddPersonToCourse2($course: ID!, $person: ID!) {
+  addPeople(courseId: $course, personId: $person) {
+    _id
+    title
+  }
+}
+
+query GetCourse2($course: ID!) {
+  getCourse(id: $course) {
+    _id
+    title
+    people {
+      _id
+      name
+    }
+  }
+}
