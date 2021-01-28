@@ -9,7 +9,7 @@ import playIcon from '../assets/static/play-icon.png';
 import plusIcon from '../assets/static/plus-icon.png';
 import removeIcon from '../assets/static/remove-icon.png'
 
-const CarouselItem = ({ id, cover, title, year, contentRating, duration, setFavorite, deleteFavorite }) => {
+const CarouselItem = ({ isList, id, cover, title, year, contentRating, duration, setFavorite, deleteFavorite }) => {
   const handleSetFavorite = () => {
     setFavorite({ id, cover, title, year, contentRating, duration });
   };
@@ -24,18 +24,25 @@ const CarouselItem = ({ id, cover, title, year, contentRating, duration, setFavo
       <div className="carousel-item__details">
         <div>
           <img className="carousel-item__details--img" src={playIcon} alt="Play Icon" />
-          <img
-            className="carousel-item__details--img"
-            src={plusIcon}
-            alt="Plus Icon"
-            onClick={handleSetFavorite}
-          />
-          <img
-            className="carousel-item__details--img"
-            src={removeIcon}
-            alt="Plus Icon"
-            onClick={() => handleDeleteFavorite(id)}
-          />
+
+          {isList
+            ? (
+              <img
+                className="carousel-item__details--img"
+                src={removeIcon}
+                alt="Plus Icon"
+                onClick={() => handleDeleteFavorite(id)}
+              />
+            )
+            : (
+              <img
+                className="carousel-item__details--img"
+                src={plusIcon}
+                alt="Plus Icon"
+                onClick={handleSetFavorite}
+              />
+            )}
+
         </div>
         <p className="carousel-item__details--title">{title}</p>
         <p className="carousel-item__details--subtitle">
