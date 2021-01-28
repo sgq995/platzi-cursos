@@ -8,7 +8,7 @@ enum Level {
 type Course {
   _id: ID!
   title: String!
-  teacher: String
+  teacher: String @deprecated
   description: String!
   topic: String
   people: [Student]
