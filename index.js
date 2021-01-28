@@ -7,6 +7,7 @@ const { join } = require('path');
 
 const { makeExecutableSchema } = require('graphql-tools');
 const express = require('express');
+const cors = require('cors');
 const { graphqlHTTP } = require('express-graphql');
 
 const resolvers = require('./lib/resolvers');
@@ -23,6 +24,8 @@ const schema = makeExecutableSchema({
   typeDefs,
   resolvers
 });
+
+app.use(cors());
 
 app.use('/api', graphqlHTTP({
   schema,
