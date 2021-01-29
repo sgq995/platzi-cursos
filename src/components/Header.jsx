@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import className from 'classnames';
+import classNames from 'classnames';
 
 import { logoutRequest } from '../actions';
 
@@ -20,7 +20,7 @@ const Header = ({ user, logoutRequest, isLogin, isRegister }) => {
     logoutRequest({})
   };
 
-  const headerClass = className('header', {
+  const headerClass = classNames('header', {
     isLogin, 
     isRegister,
   });
