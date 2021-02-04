@@ -1,0 +1,3 @@
+node --inspect <script.js>
+
+chrome://inspect
