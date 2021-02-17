@@ -5,6 +5,9 @@ const { config } = require('./config');
 
 const moviesApi = require('./routes/movies');
 
+// Body parser
+app.use(express.json());
+
 moviesApi(app);
 
 app.listen(config.port, function () {

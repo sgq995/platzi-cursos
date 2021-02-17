@@ -94,6 +94,26 @@ function moviesApi(app) {
       next(err);
     }
   });
+
+  router.patch("/:movieId", async function (req, res, next) {
+    const { movieId } = req.params;
+    const { body: movie } = req;
+
+    try {
+      const patchedMovie = await moviesService.patchMovie({
+        movieId,
+        movie
+      });
+      res
+        .status(200)
+        .json({
+          data: patchedMovie,
+          message: 'Movie deleted'
+        })
+    } catch (err) {
+      next(err);
+    }
+  });
 }
 
 module.exports = moviesApi;
