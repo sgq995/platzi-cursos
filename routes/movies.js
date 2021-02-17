@@ -1,4 +1,5 @@
 const express = require('express');
+const slash = require('express-slash');
 const MoviesService = require('../services/movies');
 const validationHandler = require('../utils/middleware/validation-handler');
 const { movieIdSchema, createMovieSchema, updateMovieSchema } = require('../utils/schema/movies');
@@ -12,6 +13,7 @@ const { movieIdSchema, createMovieSchema, updateMovieSchema } = require('../util
 function moviesApi(app) {
   const router = express.Router();
   app.use("/api/movies", router);
+  app.use(slash());
 
   const moviesService = new MoviesService();
 
