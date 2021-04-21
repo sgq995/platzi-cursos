@@ -3,23 +3,33 @@ import { Category } from '../Category'
 
 import { Item, List } from './styles'
 
-export const ListOfCategories = () => {
+function useCategoriesData () {
   const [categories, setCategories] = useState([])
-  const [showFixed, setShowFixed] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const abort = new window.AbortController()
 
+    setLoading(true)
     window.fetch('https://petgram-server-ashen.vercel.app/categories', { signal: abort.signal })
       .then(response => response.json())
       .then(json => {
         setCategories(json)
+        setLoading(false)
       })
 
     return () => {
       abort.abort()
     }
   }, [])
+
+  return { categories, loading }
+}
+
+export const ListOfCategories = () => {
+  const { categories, loading } = useCategoriesData()
+
+  const [showFixed, setShowFixed] = useState(false)
 
   useEffect(() => {
     const onScroll = e => {
@@ -35,7 +45,7 @@ export const ListOfCategories = () => {
   }, [showFixed])
 
   const renderList = (fixed) => (
-    <List className={fixed ? 'fixed' : ''}>
+    <List fixed={fixed}>
       {
         categories.map(({ id, emoji, cover, path }) => (
           <Item key={id}>
@@ -50,10 +60,16 @@ export const ListOfCategories = () => {
     </List>
   )
 
-  return (
-    <>
-      {renderList()}
-      {showFixed && renderList(showFixed)}
-    </>
-  )
+  if (loading) {
+    return (
+      'Cargando...'
+    )
+  } else {
+    return (
+      <>
+        {renderList()}
+        {showFixed && renderList(showFixed)}
+      </>
+    )
+  }
 }
