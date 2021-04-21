@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Category } from '../Category'
 
 import { Item, List } from './styles'
-import { categories } from '../../../api/db.json'
 
 export const ListOfCategories = () => {
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    const abort = new window.AbortController()
+
+    window.fetch('https://petgram-server-ashen.vercel.app/categories', { signal: abort.signal })
+      .then(response => response.json())
+      .then(json => {
+        setCategories(json)
+      })
+
+    return () => {
+      abort.abort()
+    }
+  }, [])
+
   return (
     <List>
       {
