@@ -5,8 +5,8 @@ import { gql } from '@apollo/client'
 import { useQuery } from '@apollo/react-hooks'
 
 const GET_PHOTOS = gql`
-  query getPhotos {
-    photos {
+  query getPhotos($categoryId: ID) {
+    photos(categoryId: $categoryId) {
       id
       categoryId
       src
@@ -17,8 +17,10 @@ const GET_PHOTOS = gql`
   }
 `
 
-export const ListOfPhotoCards = () => {
-  const { loading, error, data } = useQuery(GET_PHOTOS);
+export const ListOfPhotoCards = ({ categoryId }) => {
+  const { loading, error, data } = useQuery(GET_PHOTOS, {
+    variables: { categoryId }
+  })
 
   const photos = loading
     ? []
