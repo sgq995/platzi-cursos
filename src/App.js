@@ -1,8 +1,9 @@
 import React from 'react'
 import { ListOfCategories } from './components/ListOfCategories'
-import { ListOfPhotoCards } from './components/ListOfPhotoCard'
+import { ListOfPhotoCards } from './containers/ListOfPhotoCards'
 import { Logo } from './components/Logo'
 import { GlobalStyles } from './styles/GlobalStyles'
+import { PhotoCardWithQuery } from './containers/PhotoCardWithQuery'
 
 export const App = () => {
   const urlParams = new window.URLSearchParams(window.location.search)
@@ -12,8 +13,16 @@ export const App = () => {
     <>
       <GlobalStyles />
       <Logo />
-      <ListOfCategories />
-      <ListOfPhotoCards categoryId={detailId} />
+      {
+        detailId
+          ? <PhotoCardWithQuery id={detailId} />
+          : (
+            <>
+              <ListOfCategories />
+              <ListOfPhotoCards categoryId={1} />
+            </>
+            )
+      }
     </>
   )
 }
