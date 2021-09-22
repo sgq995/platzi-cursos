@@ -3,12 +3,13 @@ import { Request } from 'express';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from '../services/auth.service';
 import { User } from 'src/users/entities/user.entity';
+import { LOCAL_STRATEGY_NAME } from '../strategies/local.strategy';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(AuthGuard(LOCAL_STRATEGY_NAME))
   @Post('login')
   login(@Req() req: Request) {
     return this.authService.generateJWT(req.user as User);
