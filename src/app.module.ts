@@ -1,22 +1,21 @@
-import { Module, HttpModule, HttpService } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { DatabaseModule } from './database/database.module';
-import { enviroments } from './enviroments';
 import config from './config';
-
-
+import { HttpModule, HttpService } from '@nestjs/axios';
+import { lastValueFrom } from 'rxjs';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: enviroments[process.env.NODE_ENV] || '.env',
+      envFilePath: '.env',
       load: [config],
       isGlobal: true,
       validationSchema: Joi.object({
@@ -29,6 +28,7 @@ import config from './config';
     UsersModule,
     ProductsModule,
     DatabaseModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
@@ -36,9 +36,9 @@ import config from './config';
     {
       provide: 'TASKS',
       useFactory: async (http: HttpService) => {
-        const tasks = await http
-          .get('https://jsonplaceholder.typicode.com/todos')
-          .toPromise();
+        const tasks = await lastValueFrom(
+          http.get('https://jsonplaceholder.typicode.com/todos'),
+        );
         return tasks.data;
       },
       inject: [HttpService],
