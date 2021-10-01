@@ -1,4 +1,5 @@
 import axios from "axios";
+import { GET_ALL } from "../types/users";
 
 export const getAll = () => async (dispatch) => {
   const response = await axios.get('https://jsonplaceholder.typicode.com/users')
@@ -14,7 +15,7 @@ export const getAll = () => async (dispatch) => {
     // });
 
   dispatch({
-    type: 'GET_USERS',
+    type: GET_ALL,
     payload: response.data,
   });
 }

@@ -14,7 +14,7 @@ const Users = ({ users, getAll }) => {
     <tr key={user.id}>
       <td>{user.name}</td>
       <td>{user.email}</td>
-      <td>{user.link}</td>
+      <td>{user.website}</td>
     </tr>
   ));
 
