@@ -1,11 +1,17 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 
+import Spinner from "../Spinner";
+
 import * as usersActions from "../../actions/users";
 
 import "./index.css";
+import Fatal from "../Fatal";
+import Table from "../Table";
 
-const Users = ({ users, getAll }) => {
+const Users = (props) => {
+  const { users, loading, error, getAll } = props;
+
   useEffect(() => {
     getAll();
   }, [getAll]);
@@ -15,23 +21,27 @@ const Users = ({ users, getAll }) => {
       <td>{user.name}</td>
       <td>{user.email}</td>
       <td>{user.website}</td>
+      <td>{user.id}</td>
     </tr>
   ));
 
-  return (
-    <table className="table">
-      <thead>
-        <tr>
-          <td>Nombre</td>
-          <td>Correo</td>
-          <td>Enlace</td>
-        </tr>
-      </thead>
-      <tbody>
+  const putContent = (loading) => {
+    if (loading) {
+      return <Spinner />
+    }
+
+    if (error) {
+      return <Fatal message={error} />;
+    }
+
+    return (
+      <Table>
         {putRows(users)}
-      </tbody>
-    </table>
-  );
+      </Table>
+    );
+  }
+
+  return putContent(loading);
 }
 
 const mapStateToProps = (reducers) => {

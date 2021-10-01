@@ -22,3 +22,7 @@ code {
   color: white;
   padding-right: 50px;
 }
+
+.center {
+  text-align: center;
+}
