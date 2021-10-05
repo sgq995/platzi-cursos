@@ -1,24 +1,24 @@
-import { USERS_ERROR, USERS_GET_ALL, USERS_LOADING } from "../types/users";
+import { POSTS_ERROR, POSTS_GET_ALL, POSTS_LOADING } from "../types/posts";
 
 const INITIAL_STATE = {
-  users: [],
+  posts: [],
   loading: false,
   error: null,
 };
 
-const users = (state = INITIAL_STATE, action) => {
+const posts = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case USERS_GET_ALL:
+    case POSTS_GET_ALL:
       return {
         ...state,
-        users: action.payload,
+        posts: action.payload,
         loading: false,
       };
-
-    case USERS_LOADING:
+    
+    case POSTS_LOADING:
       return { ...state, loading: true };
 
-    case USERS_ERROR:
+    case POSTS_ERROR:
       return {
         ...state,
         error: action.payload,
@@ -30,4 +30,4 @@ const users = (state = INITIAL_STATE, action) => {
   }
 }
 
-export default users;
+export default posts;

@@ -8,6 +8,7 @@ import * as usersActions from "../../actions/users";
 import "./index.css";
 import Fatal from "../Fatal";
 import Table from "../Table";
+import { Link } from "react-router-dom";
 
 const Users = (props) => {
   const { users, loading, error, getAll } = props;
@@ -21,7 +22,11 @@ const Users = (props) => {
       <td>{user.name}</td>
       <td>{user.email}</td>
       <td>{user.website}</td>
-      <td>{user.id}</td>
+      <td>
+        <Link to={`/posts/${user.id}`}>
+          <div className="eye-solid icon"></div>
+        </Link>
+      </td>
     </tr>
   ));
 
