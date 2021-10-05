@@ -5,17 +5,18 @@ import * as usersActions from "../../actions/users";
 import * as postsActions from "../../actions/posts";
 
 const { getAll: getAllUsers } = usersActions;
-const { getAll: getAllPosts } = postsActions;
+const { getByUser: postsGetByUser } = postsActions;
 
 class Posts extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     if (!this.props.users.length) {
-      this.props.getAllUsers();
+      await this.props.getAllUsers();
     }
+    this.props.postsGetByUser(this.props.match.params.id);
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div>
         <h1>Publicaciones de { }</h1>
@@ -34,7 +35,7 @@ const mapStateToProps = ({ users, posts }) => {
 
 const mapDispatchToProps = {
   getAllUsers,
-  getAllPosts,
+  postsGetByUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

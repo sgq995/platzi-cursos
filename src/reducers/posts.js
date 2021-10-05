@@ -1,4 +1,4 @@
-import { POSTS_ERROR, POSTS_GET_ALL, POSTS_LOADING } from "../types/posts";
+import { POSTS_ERROR, POSTS_GET_ALL, POSTS_GET_BY_USER, POSTS_LOADING } from "../types/posts";
 
 const INITIAL_STATE = {
   posts: [],
@@ -13,8 +13,17 @@ const posts = (state = INITIAL_STATE, action) => {
         ...state,
         posts: action.payload,
         loading: false,
+        error: null,
       };
-    
+
+    case POSTS_GET_BY_USER:
+      return {
+        ...state,
+        posts: action.payload,
+        loading: false,
+        error: null,
+      };
+
     case POSTS_LOADING:
       return { ...state, loading: true };
 

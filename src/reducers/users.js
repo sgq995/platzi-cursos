@@ -13,6 +13,7 @@ const users = (state = INITIAL_STATE, action) => {
         ...state,
         users: action.payload,
         loading: false,
+        error: null,
       };
 
     case USERS_LOADING:
