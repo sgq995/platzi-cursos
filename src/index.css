@@ -35,3 +35,9 @@ code {
 li {
   margin: 15px 0 15px 0;
 }
+
+.tasks__container {
+  font-size: 20px;
+  margin-left: 50px;
+  margin-bottom: 70px;
+}

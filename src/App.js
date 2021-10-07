@@ -5,8 +5,8 @@ import Users from './components/Users';
 
 import './App.css';
 import Posts from './components/Posts';
-
-const Tasks = () => <div>Tasks</div>;
+import Tasks from './components/Tasks';
+import SaveTask from './components/SaveTask';
 
 function App() {
   return (
@@ -16,6 +16,7 @@ function App() {
       <div className="margin">
         <Route exact path="/" component={Users} />
         <Route exact path="/tasks" component={Tasks} />
+        <Route exact path="/tasks/save" component={SaveTask} />
         <Route exact path="/posts/:id" component={Posts} />
       </div>
     </BrowserRouter>
