@@ -14,16 +14,18 @@ const Users = (props) => {
   const { users, loading, error, getAll } = props;
 
   useEffect(() => {
-    getAll();
-  }, [getAll]);
+    if (users.length === 0) {
+      getAll();
+    }
+  }, []);
 
-  const putRows = (users) => users.map((user) => (
+  const putRows = (users) => users.map((user, idx) => (
     <tr key={user.id}>
       <td>{user.name}</td>
       <td>{user.email}</td>
       <td>{user.website}</td>
       <td>
-        <Link to={`/posts/${user.id}`}>
+        <Link to={`/posts/${idx}`}>
           <div className="eye-solid icon"></div>
         </Link>
       </td>

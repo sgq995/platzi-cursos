@@ -1,9 +1,11 @@
-import { POSTS_ERROR, POSTS_GET_ALL, POSTS_GET_BY_USER, POSTS_LOADING } from "../types/posts";
+import { POSTS_ERROR, POSTS_GET_ALL, POSTS_UPDATE, POSTS_LOADING, POSTS_COMMENTS_ERROR, POSTS_COMMENTS_LOADING, POSTS_COMMENTS_UPDATE } from "../types/posts";
 
 const INITIAL_STATE = {
   posts: [],
   loading: false,
   error: null,
+  commentsLoading: false,
+  commentsError: null,
 };
 
 const posts = (state = INITIAL_STATE, action) => {
@@ -16,7 +18,7 @@ const posts = (state = INITIAL_STATE, action) => {
         error: null,
       };
 
-    case POSTS_GET_BY_USER:
+    case POSTS_UPDATE:
       return {
         ...state,
         posts: action.payload,
@@ -33,6 +35,25 @@ const posts = (state = INITIAL_STATE, action) => {
         error: action.payload,
         loading: false,
       };
+
+    case POSTS_COMMENTS_UPDATE:
+      return {
+        ...state,
+        posts: action.payload,
+        commentsLoading: false,
+        commentsError: null,
+      };
+
+    case POSTS_COMMENTS_LOADING:
+      return { ...state, commentsLoading: true };
+
+    case POSTS_COMMENTS_ERROR:
+      return {
+        ...state,
+        commentsError: action.payload,
+        commentsLoading: false,
+      };
+
 
     default:
       return state;

@@ -26,3 +26,12 @@ code {
 .center {
   text-align: center;
 }
+
+.post__title {
+  border-top: 1px solid black;
+  cursor: pointer;
+}
+
+li {
+  margin: 15px 0 15px 0;
+}
