@@ -1,40 +1,32 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
-type Shape2D interface {
-	Area() float64
-}
-
-type Square struct {
-	base float64
-}
-
-type Rect struct {
-	width  float64
-	height float64
-}
-
-func (sqr Square) Area() float64 {
-	return sqr.base * sqr.base
-}
-
-func (rect Rect) Area() float64 {
-	return rect.width * rect.height
-}
-
-func Calc(shape Shape2D) {
-	fmt.Println("Area:", shape.Area())
+func say(text string, wg *sync.WaitGroup) {
+	defer wg.Done()
+	fmt.Println(text)
 }
 
 func main() {
-	mySqr := Square{base: 2}
-	myRect := Rect{width: 2, height: 4}
+	var wg sync.WaitGroup
 
-	Calc(mySqr)
-	Calc(myRect)
+	wg.Add(1)
+	go say("Hello", &wg)
 
-	// Interface List
-	myInterfaceList := []interface{}{"Hola", 12, 3.14}
-	fmt.Println(myInterfaceList...)
+	wg.Add(1)
+	go say("World", &wg)
+
+	wg.Wait()
+
+	wg.Add(1)
+	go func(wg *sync.WaitGroup) {
+		defer wg.Done()
+		fmt.Println("Bye~~")
+	}(&wg)
+	wg.Wait()
+
+	// time.Sleep(1 * time.Second)
 }
