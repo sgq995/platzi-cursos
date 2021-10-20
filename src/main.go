@@ -3,26 +3,35 @@ package main
 import "fmt"
 
 func main() {
-	// For
-	for i := 0; i <= 10; i++ {
-		fmt.Println(i)
+	valor1 := 1
+
+	if valor1 == 1 {
+		fmt.Println("Es 1")
+	} else {
+		fmt.Println("No es 1")
 	}
 
-	fmt.Println()
+	switch valor1 {
+	case 1:
+		fmt.Println("1")
+		break
 
-	// For while
-	counter := 0
-	for counter < 10 {
-		fmt.Println(counter)
-		counter++
+	case 2:
+		fmt.Println("2")
+		break
+
+	default:
+		fmt.Println("No es 1 ni 2")
+		break
 	}
 
-	fmt.Println()
-
-	// For forever
-	counterForever := 0
-	for {
-		fmt.Println(counterForever)
-		counterForever++
+	val2 := 200
+	switch {
+	case val2 > 100:
+		fmt.Println("Es mayor a 100")
+	case val2 < 0:
+		fmt.Println("Es menor a 0")
+	default:
+		fmt.Println("No coincide")
 	}
 }
