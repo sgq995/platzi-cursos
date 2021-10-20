@@ -2,36 +2,39 @@ package main
 
 import "fmt"
 
-type pc struct {
-	ram   int
-	disk  int
-	brand string
+type Shape2D interface {
+	Area() float64
 }
 
-func (myPc pc) ping() {
-	println(myPc.brand, "Pong")
+type Square struct {
+	base float64
 }
 
-func (myPc *pc) duplicateRAM() {
-	myPc.ram = 2 * myPc.ram
+type Rect struct {
+	width  float64
+	height float64
 }
 
-func (myPc pc) String() string {
-	return fmt.Sprintf("%d GB RAM, %d GB Disk (%s)", myPc.ram, myPc.disk, myPc.brand)
+func (sqr Square) Area() float64 {
+	return sqr.base * sqr.base
+}
+
+func (rect Rect) Area() float64 {
+	return rect.width * rect.height
+}
+
+func Calc(shape Shape2D) {
+	fmt.Println("Area:", shape.Area())
 }
 
 func main() {
-	a := 50
-	b := &a
+	mySqr := Square{base: 2}
+	myRect := Rect{width: 2, height: 4}
 
-	fmt.Println(a, b)
+	Calc(mySqr)
+	Calc(myRect)
 
-	myPc := pc{ram: 16, disk: 200, brand: "msi"}
-	fmt.Println(myPc)
-
-	myPc.ping()
-	fmt.Println(myPc)
-
-	myPc.duplicateRAM()
-	fmt.Println(myPc)
+	// Interface List
+	myInterfaceList := []interface{}{"Hola", 12, 3.14}
+	fmt.Println(myInterfaceList...)
 }
