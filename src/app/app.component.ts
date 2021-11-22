@@ -10,6 +10,8 @@ import { Product } from './product.model';
 export class AppComponent {
   title = 'angular-platzi-store';
 
+  power = 10
+
   items = ['Sebas', 'Paco', 'Ivan'];
 
   object = {};
