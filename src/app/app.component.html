@@ -2,7 +2,15 @@
 {{ title }}
 
 <div *ngIf="title === 'Sebas'">
-  Este es un div
+  Este es Sebas
+</div>
+
+<div *ngIf="title === 'Paco'">
+  Este es Paco
+</div>
+
+<div *ngIf="title === 'Ivan'">
+  Este es Ivan
 </div>
 
 <button (click)="addItem()">Add Item</button>
@@ -15,3 +23,9 @@
     <button (click)="deleteItem(i)">Delete</button>
   </li>
 </ul>
+
+<div *ngFor="let product of products">
+  {{ product.title }}
+  <img [src]="product.image" alt="">
+  {{ product.price }}
+</div>
