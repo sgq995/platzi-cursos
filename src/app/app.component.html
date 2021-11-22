@@ -13,6 +13,13 @@
   Este es Ivan
 </div>
 
+<div [ngSwitch]="title">
+  <p *ngSwitchCase="'Sebas'">Este es Sebas</p>
+  <p *ngSwitchCase="'Paco'">Este es Paco</p>
+  <p *ngSwitchCase="'Ivan'">Este es Ivan</p>
+  <p *ngSwitchDefault>No hay match</p>
+</div>
+
 <button (click)="addItem()">Add Item</button>
 
 <ul>
