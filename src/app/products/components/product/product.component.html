@@ -3,5 +3,5 @@
 <strong>{{ product.price | currency }}</strong>
 <p>{{ product.description | slice:0:20 }}</p>
 <p>{{ today | date:'HH:mm' }}</p>
-<button (click)="addCart()">Agreagar al Carrito</button>
+<button (click)="addCart()" mat-raised-button color="primary">Agreagar al Carrito</button>
 <a [routerLink]="['/products', product.id]">Ver Detalle</a>

@@ -7,9 +7,10 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { CoreModule } from '../core/core.module';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [ProductsComponent, ProductComponent, ProductDetailComponent],
-  imports: [CommonModule, CoreModule, ProductsRoutingModule],
+  imports: [CommonModule, CoreModule, ProductsRoutingModule, MaterialModule],
 })
 export class ProductsModule {}
