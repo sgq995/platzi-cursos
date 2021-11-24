@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 
-import { DemoComponent } from './demo/demo.component';
 import { LayoutComponent } from './layout/layout.component';
 
 import { AdminGuard } from './admin.guard';
@@ -34,7 +33,8 @@ const routes: Routes = [
       },
       {
         path: 'demo',
-        component: DemoComponent,
+        loadChildren: () =>
+          import('./demo/demo.module').then((m) => m.DemoModule),
       },
     ],
   },
