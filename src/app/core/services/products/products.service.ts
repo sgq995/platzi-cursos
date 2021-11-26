@@ -20,4 +20,8 @@ export class ProductsService {
       `${environment.platziStoreApi}/products/${id}`
     );
   }
+
+  create(product: Product) {
+    return this.http.post(`${environment.platziStoreApi}/products`, product);
+  }
 }
