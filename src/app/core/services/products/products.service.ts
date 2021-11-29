@@ -24,4 +24,15 @@ export class ProductsService {
   create(product: Product) {
     return this.http.post(`${environment.platziStoreApi}/products`, product);
   }
+
+  update(id: string, product: Partial<Product>) {
+    return this.http.put(
+      `${environment.platziStoreApi}/products/${id}`,
+      product
+    );
+  }
+
+  deleteProduct(id: string) {
+    return this.http.delete(`${environment.platziStoreApi}/products/${id}`);
+  }
 }
