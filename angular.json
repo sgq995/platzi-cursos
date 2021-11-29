@@ -31,8 +31,9 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "./node_modules/flexboxgrid/dist/flexboxgrid.min.css",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/flexboxgrid/dist/flexboxgrid.min.css",
+              "node_modules/swiper/swiper.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -59,6 +60,29 @@
               ],
               "outputHashing": "all"
             },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.stag.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "aot": false,
+              "buildOptimizer": false
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -75,6 +99,9 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-platzi-store:build:production"
+            },
+            "staging": {
+              "browserTarget": "angular-platzi-store:build:staging"
             },
             "development": {
               "browserTarget": "angular-platzi-store:build:development"
@@ -101,8 +128,9 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "./node_modules/flexboxgrid/dist/flexboxgrid.min.css",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/flexboxgrid/dist/flexboxgrid.min.css",
+              "node_modules/swiper/swiper.min.css",
               "src/styles.scss"
             ],
             "scripts": []
