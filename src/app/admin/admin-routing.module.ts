@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductFormComponent } from './components/product-form/product-form.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { InventoryComponent } from './components/inventory/inventory.component';
 import { NavComponent } from './components/nav/nav.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 
 const routes: Routes = [
   {
@@ -12,6 +14,14 @@ const routes: Routes = [
       {
         path: 'create',
         component: ProductFormComponent,
+      },
+      {
+        path: 'table',
+        component: InventoryComponent,
+      },
+      {
+        path: '',
+        component: DashboardComponent,
       },
     ],
   },
