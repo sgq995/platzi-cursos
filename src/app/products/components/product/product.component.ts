@@ -12,6 +12,8 @@ import {
 
 import { Product } from '../../../product.model';
 
+import { CartService } from 'src/app/core/serivces/cart.service';
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -23,7 +25,7 @@ export class ProductComponent implements OnInit, DoCheck, OnDestroy {
 
   today = new Date();
 
-  constructor() {
+  constructor(private cartService: CartService) {
     console.log('1. constructor');
   }
 
@@ -45,6 +47,7 @@ export class ProductComponent implements OnInit, DoCheck, OnDestroy {
 
   addCart() {
     console.log('Agregar al carrito');
+    this.cartService.addCart(this.product);
     this.productClicked.emit(this.product.id);
   }
 }
