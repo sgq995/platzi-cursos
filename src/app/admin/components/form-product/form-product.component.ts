@@ -43,4 +43,8 @@ export class FormProductComponent implements OnInit {
       description: ['', [Validators.required]],
     });
   }
+
+  get price() {
+    return this.form.get('price');
+  }
 }
