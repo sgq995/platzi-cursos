@@ -7,8 +7,12 @@ export default function ProductItem() {
   const { query: { id } } = useRouter();
 
   const [product, setProduct] = useState<TProduct | null>();
-
-  useMountFetch<TProduct | null>(`/api/avo/${id}`, (product) => setProduct(product));
+  
+  useMountFetch<TProduct | null>(
+    () => id && `/api/avo/${id}`,
+    (product) => setProduct(product),
+    [id],
+  );
 
   return (
     <div>

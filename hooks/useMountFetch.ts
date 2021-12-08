@@ -1,12 +1,24 @@
-import { useEffect } from 'react';
+import { DependencyList, useEffect } from 'react';
+
+function makeFetch<T, R>(url: string, onfulfilled: (value: T) => R) {
+  return fetch(url)
+    .then((response) => response.json())
+    .then(onfulfilled);
+}
 
 export default function useMountFetch<T = any, R = any>(
-  url: string,
-  onfulfilled: (value: T) => R
+  createUrl: string | ((deps: DependencyList) => string | null | undefined),
+  onfulfilled: (value: T) => R,
+  deps: DependencyList = []
 ) {
   useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then(onfulfilled);
-  }, []);
+    if (typeof createUrl === 'string') {
+      makeFetch(createUrl, onfulfilled);
+    } else {
+      const url = createUrl(deps);
+      if (url) {
+        makeFetch(url, onfulfilled);
+      }
+    }
+  }, deps);
 }
