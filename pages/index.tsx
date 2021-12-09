@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar/Navbar'
+import Link from 'next/link';
+import { useState } from 'react'
 import useMountFetch from '../hooks/useMountFetch';
 
 import styles from '../styles/Home.module.css'
@@ -11,10 +11,14 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <Navbar />
       <h1>Hola Mundo</h1>
       {productList.map(product => {
-        return <div key={product.id}>{product.name}</div>
+        return (
+          <div key={product.id}>
+            {product.name}
+            <Link href={`/product/${product.id}`}>Go</Link>
+          </div>
+        );
       })}
     </div>
   )
