@@ -1,14 +1,10 @@
 fn main() {
-    println!("Arrays");
+    println!("Functions");
 
-    let mut names = Vec::new();
+    println!("10 + 1 = {}", add_one(10));
+}
 
-    for _i in 0..3 {
-        println!("Type a name:");
-        let mut name = String::new();
-        std::io::stdin().read_line(&mut name).unwrap();
-        names.push(name.trim().to_string());
-    }
-
-    println!("{:?}", names);
+fn add_one(num: i32) -> i32 {
+    let result = num + 1;
+    return result;
 }
