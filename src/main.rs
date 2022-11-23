@@ -1,10 +1,17 @@
+use std::fs;
+
+use csv::{ReaderBuilder, StringRecord};
+
+const FILENAME: &str = "history.csv";
+
 fn main() {
-    println!("Functions");
+    let content = fs::read_to_string(FILENAME).unwrap();
 
-    println!("10 + 1 = {}", add_one(10));
-}
+    let mut rdr = ReaderBuilder::new()
+        .delimiter(b';')
+        .from_reader(content.as_bytes());
 
-fn add_one(num: i32) -> i32 {
-    let result = num + 1;
-    return result;
+    for result in rdr.records() {
+        println!("{:?}", result.unwrap().get(2).unwrap().trim());
+    }
 }
