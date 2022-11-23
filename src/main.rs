@@ -1,12 +1,20 @@
 fn main() {
-    println!("How old are you? ");
-    let mut age_str: String = String::new();
-    std::io::stdin().read_line(&mut age_str).unwrap();
-    let age: i8 = age_str.trim().parse().unwrap();
+    println!("Let's play 21");
 
-    if age < 18 {
-        println!("You should wait at least {} years", 18 - age);
-    } else {
-        println!("You can enter");
+    let mut sum: i8 = 0;
+
+    loop {
+        println!("Which card do you have? ");
+        let mut card: String = String::new();
+        std::io::stdin().read_line(&mut card).unwrap();
+
+        let number: i8 = card.trim().parse().unwrap();
+        sum += number;
+
+        if sum >= 21 {
+            break;
+        }
     }
+
+    println!("Your result: {}", sum);
 }
