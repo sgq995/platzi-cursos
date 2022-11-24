@@ -1,0 +1,6 @@
+export const TASKS_GET_ALL = 'TASKS_GET_TASKS';
+export const TASKS_LOADING = 'TASKS_LOADING';
+export const TASKS_ERROR = 'TASKS_ERROR';
+export const TASKS_SWITCH_USER = 'TASKS_SWITCH_USER';
+export const TASKS_SWITCH_TITLE = 'TASKS_SWITCH_TITLE';
+export const TASKS_ADDED = 'TASKS_ADDED';
