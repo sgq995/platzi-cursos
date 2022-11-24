@@ -1,0 +1,5 @@
+Nodemon: Development
+Monitorizar y recargar el script
+
+Pm2: Production
+Monitorizar el codigo y ejecutarlo
