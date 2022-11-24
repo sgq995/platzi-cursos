@@ -8,11 +8,12 @@
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import CoinsStack from 'CryptoTracker/src/components/CoinStack';
 
 const App = () => {
   return (
     <NavigationContainer>
-
+      <CoinsStack />
     </NavigationContainer>
   );
 };
