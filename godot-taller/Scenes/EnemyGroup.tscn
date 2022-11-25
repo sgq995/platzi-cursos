@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/enemigos/enemigo1.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/EnemyPath.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/EnemyGroup.gd" type="Script" id=2]
 
 [sub_resource type="Curve2D" id=8]
 _data = {
@@ -59,7 +59,7 @@ loop = false
 [node name="AnimatedSprite" type="AnimatedSprite" parent="PathFollow2D/Enemy"]
 frames = SubResource( 6 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/Enemy"]
@@ -78,7 +78,6 @@ loop = false
 [node name="AnimatedSprite" type="AnimatedSprite" parent="PathFollow2D2/Enemy"]
 frames = SubResource( 6 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D2/Enemy"]
@@ -97,7 +96,6 @@ loop = false
 [node name="AnimatedSprite" type="AnimatedSprite" parent="PathFollow2D3/Enemy"]
 frames = SubResource( 6 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D3/Enemy"]
@@ -116,6 +114,7 @@ loop = false
 [node name="AnimatedSprite" type="AnimatedSprite" parent="PathFollow2D4/Enemy"]
 frames = SubResource( 6 )
 animation = "idle"
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D4/Enemy"]
@@ -134,6 +133,7 @@ loop = false
 [node name="AnimatedSprite" type="AnimatedSprite" parent="PathFollow2D5/Enemy"]
 frames = SubResource( 6 )
 animation = "idle"
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D5/Enemy"]
