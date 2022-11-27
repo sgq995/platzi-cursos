@@ -32,6 +32,12 @@ fn update_post(conn: &mut SqliteConnection, id: i32) -> usize {
         .expect("Couldn't update post")
 }
 
+fn delete_post(conn: &mut SqliteConnection, slug: &str) -> usize {
+    diesel::delete(posts::dsl::posts.filter(posts::dsl::slug.eq(slug)))
+        .execute(conn)
+        .expect("Couldn't delete post")
+}
+
 fn main() {
     let conn = &mut establish_connection();
 
