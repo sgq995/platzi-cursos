@@ -25,12 +25,19 @@ fn create_post(conn: &mut SqliteConnection, title: &str, body: &str, slug: &str)
         .expect("Failed to insert")
 }
 
+fn update_post(conn: &mut SqliteConnection, id: i32) -> usize {
+    diesel::update(posts::dsl::posts.filter(posts::dsl::id.eq(id)))
+        .set(posts::dsl::slug.eq("second-post"))
+        .execute(conn)
+        .expect("Couldn't update post")
+}
+
 fn main() {
     let conn = &mut establish_connection();
 
     // create_post(conn, "My second post", "Lorem ipsum", "first-post");
 
-    // use self::schema::posts::dsl::*;
+    // update_post(conn, 2);
 
     let posts_result = posts::dsl::posts
         .order(posts::dsl::id.desc())
