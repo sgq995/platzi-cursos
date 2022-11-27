@@ -3,7 +3,7 @@ pub mod schema;
 
 use std::env;
 
-use diesel::{Connection, RunQueryDsl, SqliteConnection};
+use diesel::{Connection, ExpressionMethods, QueryDsl, RunQueryDsl, SqliteConnection};
 use dotenvy::dotenv;
 
 use crate::{models::NewPost, models::Post, schema::posts};
@@ -27,13 +27,17 @@ fn create_post(conn: &mut SqliteConnection, title: &str, body: &str, slug: &str)
 
 fn main() {
     let conn = &mut establish_connection();
-    create_post(conn, "My second post", "Lorem ipsum", "first-post");
+
+    // create_post(conn, "My second post", "Lorem ipsum", "first-post");
+
+    // use self::schema::posts::dsl::*;
 
     let posts_result = posts::dsl::posts
+        .order(posts::dsl::id.desc())
         .load::<Post>(conn)
         .expect("Something goes wrong");
 
     for post in posts_result {
-        println!("{}", post.title);
+        println!("{:?}", post);
     }
 }
