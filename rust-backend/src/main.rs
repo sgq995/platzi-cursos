@@ -1,11 +1,16 @@
+pub mod models;
+pub mod schema;
+
 use std::env;
 
-use actix_web::{get, App, HttpResponse, HttpServer, Responder};
+use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
 use diesel::{
-    r2d2::{ConnectionManager, Pool},
-    SqliteConnection,
+    r2d2::{self, ConnectionManager, Pool},
+    RunQueryDsl, SqliteConnection,
 };
 use dotenvy::dotenv;
+
+pub type DbPool = r2d2::Pool<ConnectionManager<SqliteConnection>>;
 
 fn establish_connection() -> ConnectionManager<SqliteConnection> {
     dotenv().ok();
@@ -14,9 +19,32 @@ fn establish_connection() -> ConnectionManager<SqliteConnection> {
     ConnectionManager::<SqliteConnection>::new(database_url)
 }
 
-#[get("/hello")]
-async fn hello_world() -> impl Responder {
-    HttpResponse::Ok().body("Hello world")
+#[get("/")]
+async fn index(pool: web::Data<DbPool>) -> impl Responder {
+    use crate::models::Post;
+    use crate::schema::posts::dsl::posts;
+
+    let posts_result = web::block(move || {
+        let conn = &mut pool
+            .get()
+            .expect("Connection was not found. Did you provide the pool to Actix");
+        return posts.load::<Post>(conn);
+    })
+    .await;
+
+    match posts_result {
+        Ok(data) => {
+            let list = data.map_err(|e| {
+                eprintln!("{}", e);
+                HttpResponse::InternalServerError().finish()
+            });
+            HttpResponse::Ok().body(format!("{:?}", list))
+        }
+        Err(err) => {
+            eprintln!("{}", err);
+            HttpResponse::InternalServerError().finish()
+        }
+    }
 }
 
 #[actix_web::main]
@@ -26,9 +54,13 @@ async fn main() -> std::io::Result<()> {
         .build(connection_manager)
         .expect("Failed when creating the pool");
 
-    HttpServer::new(move || App::new().app_data(pool.clone()).service(hello_world))
-        .bind(("0.0.0.0", 9900))
-        .unwrap()
-        .run()
-        .await
+    HttpServer::new(move || {
+        App::new()
+            .app_data(web::Data::new(pool.clone()))
+            .service(index)
+    })
+    .bind(("0.0.0.0", 9900))
+    .unwrap()
+    .run()
+    .await
 }
