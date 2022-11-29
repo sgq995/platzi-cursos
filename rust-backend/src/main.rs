@@ -1,6 +1,8 @@
 pub mod models;
 pub mod schema;
 
+extern crate tera;
+
 use std::env;
 
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
@@ -9,6 +11,7 @@ use diesel::{
     RunQueryDsl, SqliteConnection,
 };
 use dotenvy::dotenv;
+use tera::{Context, Tera};
 
 pub type DbPool = r2d2::Pool<ConnectionManager<SqliteConnection>>;
 
@@ -94,6 +97,15 @@ async fn create(
     }
 }
 
+#[get("/tera")]
+async fn tera_test(template_engine: web::Data<Tera>) -> impl Responder {
+    let mut context = Context::new();
+
+    HttpResponse::Ok()
+        .content_type("text/html")
+        .body(template_engine.render("index.html", &context).unwrap())
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let connection_manager = establish_connection();
@@ -102,10 +114,14 @@ async fn main() -> std::io::Result<()> {
         .expect("Failed when creating the pool");
 
     HttpServer::new(move || {
+        let tera = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*")).unwrap();
+
         App::new()
             .app_data(web::Data::new(pool.clone()))
+            .app_data(web::Data::new(tera))
             .service(index)
             .service(create)
+            .service(tera_test)
     })
     .bind(("0.0.0.0", 9900))
     .unwrap()
