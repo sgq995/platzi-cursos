@@ -8,7 +8,7 @@ use std::env;
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use diesel::{
     r2d2::{self, ConnectionManager, Pool},
-    RunQueryDsl, SqliteConnection,
+    ExpressionMethods, QueryDsl, RunQueryDsl, SqliteConnection,
 };
 use dotenvy::dotenv;
 use tera::{Context, Tera};
@@ -27,7 +27,7 @@ fn slugify(text: &String) -> String {
 }
 
 #[get("/")]
-async fn index(pool: web::Data<DbPool>) -> impl Responder {
+async fn index(pool: web::Data<DbPool>, template_engine: web::Data<Tera>) -> impl Responder {
     use crate::models::Post;
     use crate::schema::posts::dsl::posts;
 
@@ -45,7 +45,17 @@ async fn index(pool: web::Data<DbPool>) -> impl Responder {
                 eprintln!("{}", e);
                 HttpResponse::InternalServerError().finish()
             });
-            HttpResponse::Ok().body(format!("{:?}", list))
+            // HttpResponse::Ok().body(format!("{:?}", list))
+
+            let posts_result = list.unwrap();
+
+            let mut context = Context::new();
+            context.insert("test", "This is a test");
+            context.insert("posts", &posts_result);
+
+            HttpResponse::Ok()
+                .content_type("text/html")
+                .body(template_engine.render("index.html", &context).unwrap())
         }
         Err(err) => {
             eprintln!("{}", err);
@@ -97,13 +107,49 @@ async fn create(
     }
 }
 
-#[get("/tera")]
-async fn tera_test(template_engine: web::Data<Tera>) -> impl Responder {
-    let mut context = Context::new();
+#[get("/blog/{slug}")]
+async fn blog(
+    pool: web::Data<DbPool>,
+    template_engine: web::Data<Tera>,
+    slug: web::Path<String>,
+) -> impl Responder {
+    use crate::models::Post;
+    use crate::schema::posts::dsl::{self, posts};
 
-    HttpResponse::Ok()
-        .content_type("text/html")
-        .body(template_engine.render("index.html", &context).unwrap())
+    let posts_result = web::block(move || {
+        let conn = &mut pool
+            .get()
+            .expect("Connection was not found. Did you provide the pool to Actix");
+        let slug = slug.into_inner();
+        return posts.filter(dsl::slug.eq(&slug)).load::<Post>(conn);
+    })
+    .await;
+
+    match posts_result {
+        Ok(data) => {
+            let list = data.map_err(|e| {
+                eprintln!("{}", e);
+                HttpResponse::InternalServerError().finish()
+            });
+            // HttpResponse::Ok().body(format!("{:?}", list))
+
+            let posts_result = list.unwrap();
+            if posts_result.len() == 0 {
+                return HttpResponse::NotFound().finish();
+            }
+
+            let mut context = Context::new();
+            context.insert("post", &posts_result[0]);
+
+            HttpResponse::Ok()
+                .content_type("text/html")
+                .body(template_engine.render("post.html", &context).unwrap())
+        }
+        Err(err) => {
+            eprintln!("{}", err);
+            HttpResponse::InternalServerError().finish()
+        }
+    }
 }
 
 #[actix_web::main]
@@ -121,7 +167,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(web::Data::new(tera))
             .service(index)
             .service(create)
-            .service(tera_test)
+            .service(blog)
     })
     .bind(("0.0.0.0", 9900))
     .unwrap()
