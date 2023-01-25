@@ -2,6 +2,7 @@
   import svelteLogo from './assets/svelte.svg';
   import About from './components/About.svelte';
   import Person from './components/Person.svelte';
+  import Skills from './components/Skills.svelte';
   import Text from './components/Text.svelte';
   import Counter from './lib/Counter.svelte';
 
@@ -15,7 +16,10 @@
 <main>
   <About />
   <Text text="Hi!" />
+
   <Person {...data} />
+
+  <Skills />
 
   <div>
     <a href="https://vitejs.dev" target="_blank">
