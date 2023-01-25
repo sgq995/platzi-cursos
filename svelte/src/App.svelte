@@ -3,6 +3,7 @@
   import About from './components/About.svelte';
   import Input from './components/Input.svelte';
   import Person from './components/Person.svelte';
+  import Photos from './components/Photos.svelte';
   import Skills from './components/Skills.svelte';
   import Text from './components/Text.svelte';
   import Counter from './lib/Counter.svelte';
@@ -24,47 +25,12 @@
 
   <Input />
 
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank"
-      >SvelteKit</a
-    >, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">Click on the Vite and Svelte logos to learn more</p>
+  <Photos />
 </main>
 
 <style>
   :global(body.dark-mode) {
     background-color: #1d3040;
     color: #bfc2c7;
-  }
-
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
   }
 </style>
