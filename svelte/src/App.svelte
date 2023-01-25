@@ -1,6 +1,7 @@
 <script>
   import svelteLogo from './assets/svelte.svg';
   import About from './components/About.svelte';
+  import ButtonCount from './components/ButtonCount.svelte';
   import Input from './components/Input.svelte';
   import Person from './components/Person.svelte';
   import Photos from './components/Photos.svelte';
@@ -18,6 +19,8 @@
 <main>
   <About />
   <Text text="Hi!" />
+
+  <ButtonCount />
 
   <Person {...data} />
 
