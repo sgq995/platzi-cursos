@@ -1,6 +1,7 @@
 <script>
   import svelteLogo from './assets/svelte.svg';
   import About from './components/About.svelte';
+  import Input from './components/Input.svelte';
   import Person from './components/Person.svelte';
   import Skills from './components/Skills.svelte';
   import Text from './components/Text.svelte';
@@ -20,6 +21,8 @@
   <Person {...data} />
 
   <Skills />
+
+  <Input />
 
   <div>
     <a href="https://vitejs.dev" target="_blank">
