@@ -1,4 +1,4 @@
-public class Messages {
+public class Message {
     int id;
 
     String message;
@@ -7,7 +7,7 @@ public class Messages {
 
     String timestamp;
 
-    public Messages( String message, String author, String timestamp ) {
+    public Message() {
 
     }
 

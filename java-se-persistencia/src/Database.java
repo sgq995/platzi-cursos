@@ -7,9 +7,6 @@ public class Database {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/messages_app", "root", "example");
-            if (connection != null) {
-                System.out.println("Connected");
-            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
